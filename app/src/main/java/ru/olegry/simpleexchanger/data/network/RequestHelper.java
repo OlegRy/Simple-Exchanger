@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class RequestHelper {
 
-    private static final int DEFAULT_TIMEOUT = 10_000;
+    private static final int DEFAULT_TIMEOUT = 5_000;
 
     private String baseUrl;
 

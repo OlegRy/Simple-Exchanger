@@ -6,4 +6,6 @@
     <string name="convert">Конвертировать</string>
     <string name="result_template">Результат: %1$s</string>
     <string name="enter_amount">Введите количество для конвертации</string>
+    <string name="converter">Конвертер</string>
+    <string name="error">Произошла ошибка</string>
 </resources>

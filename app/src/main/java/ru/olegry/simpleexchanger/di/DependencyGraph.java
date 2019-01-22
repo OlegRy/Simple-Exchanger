@@ -59,4 +59,8 @@ public class DependencyGraph {
         Object object = dependencies.get(clazz);
         return object != null ? clazz.cast(object) : null;
     }
+
+    public void clear() {
+        dependencies.clear();
+    }
 }

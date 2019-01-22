@@ -1,12 +1,16 @@
 package ru.olegry.simpleexchanger.presentation.currencies;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -49,7 +53,6 @@ public class CurrenciesFragment extends BaseFragment implements CurrenciesView, 
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
         mPresenter.attachView(this);
-        mPresenter.currencies();
     }
 
     @Override
@@ -59,9 +62,8 @@ public class CurrenciesFragment extends BaseFragment implements CurrenciesView, 
     }
 
     @Override
-    public void onDestroy() {
+    protected void destroyPresenter() {
         mPresenter.onDestroy();
-        super.onDestroy();
     }
 
     @Override
@@ -87,6 +89,7 @@ public class CurrenciesFragment extends BaseFragment implements CurrenciesView, 
     @Override
     public void showError(Throwable error) {
         error.printStackTrace();
+        Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -108,7 +111,22 @@ public class CurrenciesFragment extends BaseFragment implements CurrenciesView, 
 
     private void initViews(View view) {
         mViewHolder = new ViewHolder(view);
+        initToolbar();
         initRecyclerView();
+    }
+
+    private void initToolbar() {
+        Context context = getContext();
+        mViewHolder.mToolbar.setTitle(mInitial ? R.string.initial_currency : R.string.result_currency);
+        if (context != null) {
+            mViewHolder.mToolbar.setNavigationIcon(ContextCompat.getDrawable(context, R.drawable.ic_arrow_back));
+            mViewHolder.mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getActivity() != null) getActivity().onBackPressed();
+                }
+            });
+        }
     }
 
     private void initRecyclerView() {
@@ -119,10 +137,12 @@ public class CurrenciesFragment extends BaseFragment implements CurrenciesView, 
     }
 
     private class ViewHolder {
+        private Toolbar mToolbar;
         private RecyclerView mCurrencies;
         private View mProgress;
 
         ViewHolder(View view) {
+            mToolbar = view.findViewById(R.id.toolbar);
             mCurrencies = view.findViewById(R.id.rv_currencies);
             mProgress = view.findViewById(R.id.progress);
         }

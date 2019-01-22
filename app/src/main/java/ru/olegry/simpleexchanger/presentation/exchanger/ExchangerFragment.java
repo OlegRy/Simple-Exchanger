@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.view.View;
 import android.widget.TextView;
@@ -28,9 +29,8 @@ public class ExchangerFragment extends BaseFragment implements ExchangerView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewHolder = new ViewHolder(view);
+        initViews(view);
         mPresenter.attachView(this);
-        mPresenter.currencies();
     }
 
     @Override
@@ -40,14 +40,14 @@ public class ExchangerFragment extends BaseFragment implements ExchangerView {
     }
 
     @Override
-    public void onDestroy() {
+    protected void destroyPresenter() {
         mPresenter.onDestroy();
-        super.onDestroy();
     }
 
     @Override
     public void showError(Throwable error) {
         error.printStackTrace();
+        Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -87,8 +87,14 @@ public class ExchangerFragment extends BaseFragment implements ExchangerView {
         return R.layout.fragment_exchanger;
     }
 
+    private void initViews(View view) {
+        mViewHolder = new ViewHolder(view);
+        mViewHolder.mToolbar.setTitle(R.string.converter);
+    }
+
     private class ViewHolder {
 
+        private Toolbar mToolbar;
         private TextInputEditText mAmount;
         private View mInitialCurrencyContainer;
         private TextView mInitialCurrencyValue;
@@ -96,16 +102,17 @@ public class ExchangerFragment extends BaseFragment implements ExchangerView {
         private TextView mResultCurrencyValue;
         private View mProgress;
         private View mContent;
-        private View mConvert;
 
+        private View mConvert;
         ViewHolder(View view) {
+            mToolbar = view.findViewById(R.id.toolbar);
             mAmount = view.findViewById(R.id.tiet_amount);
             mInitialCurrencyContainer = view.findViewById(R.id.ll_initial_currency);
             mInitialCurrencyValue = view.findViewById(R.id.tv_initial_currency);
             mResultCurrencyContainer = view.findViewById(R.id.ll_result_currency);
             mResultCurrencyValue = view.findViewById(R.id.tv_result_currency);
             mProgress = view.findViewById(R.id.progress);
-            mContent = view.findViewById(R.id.ll_content);
+            mContent = view.findViewById(R.id.sv_content);
             mConvert = view.findViewById(R.id.btn_convert);
 
             mInitialCurrencyContainer.setOnClickListener(new CurrencyChooseClickListener(true));
@@ -121,6 +128,7 @@ public class ExchangerFragment extends BaseFragment implements ExchangerView {
                 }
             });
         }
+
     }
 
     private class CurrencyChooseClickListener implements View.OnClickListener {
