@@ -8,6 +8,7 @@ import ru.olegry.simpleexchanger.data.executors.TaskExecutor;
 import ru.olegry.simpleexchanger.domain.currencies.CurrenciesInteractor;
 import ru.olegry.simpleexchanger.models.Currency;
 import ru.olegry.simpleexchanger.presentation.base.presenter.MvpPresenter;
+import ru.olegry.simpleexchanger.presentation.base.presenter.NotRepeatableViewCommand;
 import ru.olegry.simpleexchanger.presentation.base.presenter.ViewCommand;
 
 public class CurrenciesPresenter extends MvpPresenter<CurrenciesView> {
@@ -49,7 +50,7 @@ public class CurrenciesPresenter extends MvpPresenter<CurrenciesView> {
 
             @Override
             public void onError(final Throwable t) {
-                apply(new ViewCommand() {
+                apply(new NotRepeatableViewCommand() {
                     @Override
                     public void execute() {
                         getMvpView().showError(t);

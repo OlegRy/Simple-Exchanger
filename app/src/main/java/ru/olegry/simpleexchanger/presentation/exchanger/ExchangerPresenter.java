@@ -72,7 +72,7 @@ public class ExchangerPresenter extends MvpPresenter<ExchangerView> {
 
             @Override
             public void onError(final Throwable t) {
-                apply(new ViewCommand() {
+                apply(new NotRepeatableViewCommand() {
                     @Override
                     public void execute() {
                         getMvpView().showError(t);
@@ -108,7 +108,7 @@ public class ExchangerPresenter extends MvpPresenter<ExchangerView> {
 
             @Override
             public void onError(final Throwable t) {
-                apply(new ViewCommand() {
+                apply(new NotRepeatableViewCommand() {
                     @Override
                     public void execute() {
                         getMvpView().showError(t);
