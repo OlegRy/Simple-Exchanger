@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Simple Exchanger</string>
+    <string name="amount">Количество</string>
+    <string name="initial_currency">Исходня валюта</string>
+    <string name="result_currency">Конечная валюта</string>
+    <string name="convert">Конвертировать</string>
+    <string name="result_template">Результат: %1$s</string>
+    <string name="enter_amount">Введите количество для конвертации</string>
+</resources>
