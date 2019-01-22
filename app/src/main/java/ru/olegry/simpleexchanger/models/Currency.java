@@ -13,7 +13,7 @@ public class Currency {
     private String id;
 
     @Element(name = "NumCode")
-    private int numCode;
+    private String numCode;
 
     @Element(name = "CharCode")
     private String charCode;
@@ -27,6 +27,18 @@ public class Currency {
     @Element(name = "Value")
     private String value;
 
+    public Currency() {
+    }
+
+    public Currency(String id, String numCode, String charCode, String nominal, String name, String value) {
+        this.id = id;
+        this.numCode = numCode;
+        this.charCode = charCode;
+        this.nominal = nominal;
+        this.name = name;
+        this.value = value;
+    }
+
     public String getId() {
         return id;
     }
@@ -35,11 +47,11 @@ public class Currency {
         this.id = id;
     }
 
-    public int getNumCode() {
+    public String getNumCode() {
         return numCode;
     }
 
-    public void setNumCode(int numCode) {
+    public void setNumCode(String numCode) {
         this.numCode = numCode;
     }
 
@@ -80,7 +92,7 @@ public class Currency {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Currency currency = (Currency) o;
-        return numCode == currency.numCode &&
+        return Objects.equals(numCode, currency.numCode) &&
                 Objects.equals(id, currency.id) &&
                 Objects.equals(charCode, currency.charCode) &&
                 Objects.equals(nominal, currency.nominal) &&

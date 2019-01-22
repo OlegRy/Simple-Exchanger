@@ -16,7 +16,7 @@ class CurrenciesTable {
         return String.format(
                 "CREATE TABLE IF NOT EXISTS %s (" +
                         "%s VARCHAR(20) PRIMARY KEY," +
-                        "%s INTEGER," +
+                        "%s VARCHAR(20)," +
                         "%s VARCHAR(10)," +
                         "%s VARCHAR(10)," +
                         "%s VARCHAR(100)," +

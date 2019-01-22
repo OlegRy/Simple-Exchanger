@@ -35,7 +35,7 @@ class DbSerializer {
         do {
             Currency currency = new Currency();
             currency.setId(cursor.getString(idIndex));
-            currency.setNumCode(cursor.getInt(numCodeIndex));
+            currency.setNumCode(cursor.getString(numCodeIndex));
             currency.setCharCode(cursor.getString(charCodeIndex));
             currency.setNominal(cursor.getString(nominalIndex));
             currency.setName(cursor.getString(nameIndex));

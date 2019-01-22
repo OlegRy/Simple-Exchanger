@@ -6,15 +6,16 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 
-public class ExchangerUtil {
+public class Exchanger {
 
     private DecimalFormat format;
 
-    public ExchangerUtil() {
+    public Exchanger() {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator(',');
         format = new DecimalFormat("#,##", symbols);
         format.setMaximumFractionDigits(2);
+        format.setGroupingUsed(false);
     }
 
     public String exchange(String amount, String initialValue, String resultValue) throws ParseException {

@@ -15,7 +15,7 @@ import ru.olegry.simpleexchanger.presentation.currencies.CurrenciesPresenter;
 import ru.olegry.simpleexchanger.presentation.exchanger.ExchangerPresenter;
 import ru.olegry.simpleexchanger.repositories.CurrencyRepository;
 import ru.olegry.simpleexchanger.repositories.CurrencyRepositoryImpl;
-import ru.olegry.simpleexchanger.utils.ExchangerUtil;
+import ru.olegry.simpleexchanger.utils.Exchanger;
 
 class DependencyProvider {
 
@@ -46,7 +46,7 @@ class DependencyProvider {
         return new CurrencyRepositoryImpl(networkManager, databaseManager, cache);
     }
 
-    ExchangerInteractor provideExchangerInteractor(CurrencyRepository repository, ExchangerUtil exchanger) {
+    ExchangerInteractor provideExchangerInteractor(CurrencyRepository repository, Exchanger exchanger) {
         return new ExchangerInteractor(repository, exchanger);
     }
 
@@ -66,7 +66,7 @@ class DependencyProvider {
         return new ResourceManager(context);
     }
 
-    ExchangerUtil provideExchanger() {
-        return new ExchangerUtil();
+    Exchanger provideExchanger() {
+        return new Exchanger();
     }
 }

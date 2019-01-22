@@ -6,14 +6,14 @@ import java.util.Observable;
 
 import ru.olegry.simpleexchanger.models.Currency;
 import ru.olegry.simpleexchanger.repositories.CurrencyRepository;
-import ru.olegry.simpleexchanger.utils.ExchangerUtil;
+import ru.olegry.simpleexchanger.utils.Exchanger;
 
 public class ExchangerInteractor {
 
     private final CurrencyRepository repository;
-    private final ExchangerUtil exchanger;
+    private final Exchanger exchanger;
 
-    public ExchangerInteractor(CurrencyRepository repository, ExchangerUtil exchanger) {
+    public ExchangerInteractor(CurrencyRepository repository, Exchanger exchanger) {
         this.repository = repository;
         this.exchanger = exchanger;
     }

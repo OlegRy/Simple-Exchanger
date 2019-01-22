@@ -16,7 +16,7 @@ import ru.olegry.simpleexchanger.domain.exchanger.ExchangerInteractor;
 import ru.olegry.simpleexchanger.presentation.currencies.CurrenciesPresenter;
 import ru.olegry.simpleexchanger.presentation.exchanger.ExchangerPresenter;
 import ru.olegry.simpleexchanger.repositories.CurrencyRepository;
-import ru.olegry.simpleexchanger.utils.ExchangerUtil;
+import ru.olegry.simpleexchanger.utils.Exchanger;
 
 public class DependencyGraph {
 
@@ -31,7 +31,7 @@ public class DependencyGraph {
         DatabaseManager dbManager = provider.provideDatabaseManager(application);
         CurrenciesCache cache = provider.provideCache();
         CurrencyRepository repository = provider.provideRepository(networkManager, dbManager, cache);
-        ExchangerUtil exchanger = provider.provideExchanger();
+        Exchanger exchanger = provider.provideExchanger();
         ExchangerInteractor exchangerInteractor = provider.provideExchangerInteractor(repository, exchanger);
         CurrenciesInteractor currenciesInteractor = provider.provideCurrenciesInteractor(repository);
         ExchangerPresenter exchangerPresenter = provider.provideExchangerPresenter(exchangerInteractor);
@@ -49,7 +49,7 @@ public class DependencyGraph {
         dependencies.put(ExchangerPresenter.class, exchangerPresenter);
         dependencies.put(CurrenciesPresenter.class, currenciesPresenter);
         dependencies.put(ResourceManager.class, resourceManager);
-        dependencies.put(ExchangerUtil.class, exchanger);
+        dependencies.put(Exchanger.class, exchanger);
     }
 
     public <T> T get(Class<T> clazz) {
